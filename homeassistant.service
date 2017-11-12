@@ -1,0 +1,15 @@
+# Install as /etc/systemd/system/homeassistant.service
+# systemctl --system daemon-reload
+# systemctl enable homeassistant
+[Unit]
+Description=Home Assistant
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/hass
+StandardOutput=null
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
