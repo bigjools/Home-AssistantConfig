@@ -1,0 +1,131 @@
+#default_view:
+#  view: yes
+#  icon: mdi:home
+#  entities:
+#    - group.all_switches
+#    - group.all_lights
+default_view:
+  view: yes
+  icon: mdi:home
+  name: Home
+  entities:
+    - sensor.pws_weather
+    - sensor.pws_temp_c
+    - sensor.pws_precip_today_metric
+    - sensor.pws_alerts
+    - sensor.pws_weather_1d_metric
+    - sensor.pws_weather_1n_metric
+    - sensor.pws_weather_2d_metric
+    - sensor.pws_weather_2n_metric
+    - history_graph.power_generatedconsumed
+    - group.cinema_room_lights
+    - group.tv_room_lights
+    - group.outside_lights
+    - media_player.soundbar
+    - media_player.spotify
+    - group.weather
+    - camera.office_camera
+media:
+  view: yes
+  name: Media
+  entities:
+    - media_player.cinema_kodi
+    - media_player.soundbar
+    - media_player.spotify
+    - media_player.tv
+    - media_player.tv_kodi
+tv_room_scenes:
+  name: TV room lighting scenes
+  entities:
+    - scene.green_tv
+    - scene.orange_tv_room
+    - scene.red_tv_room
+    - scene.tv_room_yellowpurple
+cinema_room_scenes:
+  name: Cinema room lighting scenes
+  entities:
+    - scene.movie_lighting
+    - scene.orange_cinema
+    - scene.purple_cinema
+tv_room_lights:
+  name: TV room lights
+  entities:
+    - light.tv_light
+    - light.blue_lamp
+    - group.tv_room_scenes
+cinema_room_lights:
+  name: Cinema room lights
+  entities:
+    - light.cinema_room_left
+    - light.cinema_room_right
+    - group.cinema_room_scenes
+outside_lights:
+  name: Outside lights
+  entities:
+    - switch.garden_lights
+lights:
+  view: yes
+  name: Lights
+  entities:
+    - group.cinema_room_lights
+    - group.tv_room_lights
+    - group.outside_lights
+irrigation_programs:
+  name: Irrigation Programs
+  control: hidden
+  entities:
+    - switch.program_borders
+    - switch.program_front_lawns
+    - switch.program_rear_lawns
+irrigation_zones:
+  name: Irrigation Zones
+  control: hidden
+  entities:
+    - switch.zone_back_border
+    - switch.zone_back_lawn_left
+    - switch.zone_back_lawn_right
+    - switch.zone_bottom_front_lawn
+    - switch.zone_front_borders
+    - switch.zone_nature_strip
+    - switch.zone_top_front_lawn
+irrigation:
+  view: yes
+  name: Irrigation
+  control: hidden
+  entities:
+    - group.irrigation_programs
+    - group.irrigation_zones
+weather:
+  view: yes
+  name: Weather
+  entities:
+    - sensor.pws_weather
+    - sensor.pws_temp_c
+    - sensor.pws_precip_today_metric
+#      - sensor.pws_precip_1d_mm
+    - sensor.pws_alerts
+
+    - sensor.pws_weather_1d_metric
+    - sensor.pws_weather_1n_metric
+    - sensor.pws_weather_2d_metric
+    - sensor.pws_weather_2n_metric
+downloads:
+  view: yes
+  name: Downloads
+  entities:
+    - group.sabnzbd
+    - group.sonarr
+sabnzbd:
+  name: Sabnzbd
+  entities:
+    - sensor.sabnzbd_disk_free
+    - sensor.sabnzbd_left
+    - sensor.sabnzbd_queue
+    - sensor.sabnzbd_speed
+    - sensor.sabnzbd_status
+sonarr:
+  name: Sonarr
+  entities:
+    - sensor.sonarr_upcoming
+    - sensor.sonarr_queue
+    - sensor.sonarr_wanted

@@ -1,0 +1,238 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 151
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Australia/Brisbane
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+  include:
+    domains:
+      - sensor
+      - switch
+  exclude:
+    entities:
+      - sensor.pws_alerts
+      - sensor.pws_weather
+      - sensor.pws_weather_1d_metric
+      - sensor.pws_weather_1n_metric
+      - sensor.pws_weather_2d_metric
+      - sensor.pws_weather_2n_metric
+      - sensor.pvoutput
+      - sensor.sabnzbd_disk
+      - sensor.sabnzbd_left
+      - sensor.sabnzbd_queue
+      - sensor.sabnzbd_status
+      - sensor.sonarr_queue
+      - sensor.sonarr_upcoming
+      - sensor.sonarr_wanted
+
+history_graph:
+  power_graph:
+    name: Power Generated/Consumed
+    refresh: 300
+    entities:
+      - sensor.power_consumption
+      - sensor.power_generation
+      - sensor.energy_consumption
+      - sensor.energy_generation
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+
+# Weather prediction
+sensor:
+#  - platform: yr
+  - platform: wunderground
+    api_key: !secret wunderground_api_key
+    pws_id: !secret wunderground_pws_id
+    monitored_conditions:
+      - weather_1d_metric
+      - weather_1n_metric
+      - weather_2d_metric
+      - weather_2n_metric
+      - alerts
+      - temp_c
+      - precip_today_metric
+      - weather
+
+  - platform: sabnzbd
+    host: 192.168.86.5
+    port: 8080
+    api_key: !secret sabnzb_api_key
+    monitored_variables:
+      - 'current_status'
+      - 'speed'
+      - 'queue_size'
+      - 'queue_remaining'
+      - 'disk_size'
+      - 'disk_free'
+
+#  - platform: google_wifi
+
+  - platform: sonarr
+    api_key: !secret sonarr_api_key
+    host: 192.168.86.5
+    monitored_conditions:
+      - 'upcoming'
+      - 'wanted'
+      - 'queue'
+    days: 2
+
+  - platform: pvoutput
+    system_id: !secret pvoutput_system_id
+    api_key: !secret pvoutput_api_key
+    scan_interval: 300
+  - platform: template
+    sensors:
+      power_consumption:
+        value_template: '{% if is_state_attr("sensor.pvoutput", "power_consumption", "NaN") %}0{% else %}{{ states.sensor.pvoutput.attributes.power_consumption }}{% endif %}'
+        friendly_name: 'Using'
+        unit_of_measurement: 'Watt'
+      energy_consumption:
+        value_template: '{{ "%0.1f"|format(states.sensor.pvoutput.attributes.energy_consumption|float/1000) }}'
+        friendly_name: 'Used'
+        unit_of_measurement: 'kWh'
+      power_generation:
+        value_template: '{% if is_state_attr("sensor.pvoutput", "power_generation", "NaN") %}0{% else %}{{ states.sensor.pvoutput.attributes.power_generation }}{% endif %}'
+        friendly_name: 'Generating'
+        unit_of_measurement: 'Watt'
+      energy_generation:
+        value_template: '{% if is_state_attr("sensor.pvoutput", "energy_generation", "NaN") %}0{% else %}{{ "%0.2f"|format(states.sensor.pvoutput.attributes.energy_generation|float/1000) }}{% endif %}'
+        friendly_name: 'Generated'
+        unit_of_measurement: 'kWh'
+
+
+
+# Text to speech
+tts:
+  - platform: google
+
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+wake_on_lan:
+
+media_player:
+  - platform: sonos
+    interface_addr: 192.168.86.68
+    hosts: 192.168.86.63
+
+  - platform: kodi
+    name: TV Kodi
+    host: 192.168.1.8
+    username: kodi
+    password: kodi
+    turn_on_action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: ec:a8:6b:fe:13:b6
+          broadcast_address: 192.168.1.255
+    turn_off_action:
+      service: media_player.kodi_call_method
+      data:
+        entity_id: media_player.kodi
+        method: System.Shutdown
+
+  - platform: kodi
+    name: Cinema Kodi
+    host: 192.168.1.9
+    username: kodi
+    password: kodi
+
+#  - platform: braviatv
+#    host: 192.168.xxxx
+
+  - platform: spotify
+    client_id: !secret spotify_id
+    client_secret: !secret spotify_secret
+
+
+
+wemo:
+  static:
+    - 192.168.86.31
+
+light:
+  - platform: lifx
+    broadcast: 192.168.86.255
+
+scene:
+  platform: lifx_cloud
+  token: !secret lifx_cloud_token
+
+switch:
+  platform: rainmachine
+  ip_address: 192.168.86.20
+  password: !secret rainmachine_password
+
+alexa:
+
+camera:
+  - platform: mjpeg
+    mjpeg_url: http://192.168.86.5:8081/
+    name: Office Camera
+
+panel_iframe:
+  rainmachine:
+    title: RainMachine
+    url: "https://192.168.86.20:8080/ui/"
+    icon: mdi:water-pump
+
+  weatherstation:
+    title: Weather Station
+    url: "http://weather.julian-edwards.com/"
+    icon: mdi:weather-rainy
+
+  pvoutput:
+    title: PVOutput
+    url: "https://pvoutput.org/intraday.jsp?id=28914&sid=26485"
+    icon: mdi:weather-sunny
