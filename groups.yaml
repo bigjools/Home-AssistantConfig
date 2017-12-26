@@ -59,10 +59,22 @@ cinema_room_lights:
     - light.cinema_room_left
     - light.cinema_room_right
     - group.cinema_room_scenes
+patio_lights:
+  name: Patio lights
+  entities:
+    - light.patio1
+    - light.patio2
+    - light.patio3
+    - light.patio4
+    - light.patio5
+    - light.patio6
+    - light.patio7
+    - light.patio8
 outside_lights:
   name: Outside lights
   entities:
     - switch.garden_lights
+    - group.patio_lights
 lights:
   view: yes
   name: Lights
