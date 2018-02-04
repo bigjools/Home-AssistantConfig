@@ -103,7 +103,7 @@ sensor:
       - weather
 
   - platform: sabnzbd
-    host: 192.168.86.5
+    host: 192.168.1.15
     port: 8080
     api_key: !secret sabnzb_api_key
     monitored_variables:
@@ -114,11 +114,11 @@ sensor:
       - 'disk_size'
       - 'disk_free'
 
-#  - platform: google_wifi
+  - platform: google_wifi
 
   - platform: sonarr
     api_key: !secret sonarr_api_key
-    host: 192.168.86.5
+    host: 192.168.1.15
     monitored_conditions:
       - 'upcoming'
       - 'wanted'
@@ -163,8 +163,8 @@ wake_on_lan:
 
 media_player:
   - platform: sonos
-    interface_addr: 192.168.86.68
-    hosts: 192.168.86.63
+    interface_addr: 192.168.1.119
+    hosts: 192.168.1.133
 
   - platform: kodi
     name: TV Kodi
@@ -199,11 +199,11 @@ media_player:
 
 wemo:
   static:
-    - 192.168.86.31
+    - 192.168.1.31
 
 light:
   - platform: lifx
-    broadcast: 192.168.86.255
+    broadcast: 192.168.1.255
 
 scene:
   platform: lifx_cloud
@@ -211,25 +211,25 @@ scene:
 
 switch:
   platform: rainmachine
-  ip_address: 192.168.86.20
+  ip_address: 192.168.1.20
   password: !secret rainmachine_password
 
 alexa:
 
 camera:
   - platform: mjpeg
-    mjpeg_url: http://192.168.86.5:8081/
+    mjpeg_url: http://192.168.1.15:8081/
     name: Office Camera
 
 panel_iframe:
   rainmachine:
     title: RainMachine
-    url: "https://192.168.86.20:8080/ui/"
+    url: "https://192.168.1.20:8080/ui/"
     icon: mdi:water-pump
 
   weatherstation:
     title: Weather Station
-    url: "http://weather.julian-edwards.com/"
+    url: "http://wx.julian-edwards.com/"
     icon: mdi:weather-rainy
 
   pvoutput:
