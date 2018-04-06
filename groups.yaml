@@ -17,11 +17,11 @@ default_view:
     - sensor.pws_weather_1n_metric
     - sensor.pws_weather_2d_metric
     - sensor.pws_weather_2n_metric
+    - camera.porch
     - history_graph.power_generatedconsumed
     - group.cinema_room_lights
     - group.tv_room_lights
     - group.outside_lights
-    - media_player.soundbar
     - media_player.spotify
     - group.weather
     - camera.office_camera

@@ -228,6 +228,12 @@ camera:
     mjpeg_url: http://192.168.1.15:8081/
     name: Office Camera
 
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_secret
+  binary_sensors:
+    monitored_conditions:
+
 panel_iframe:
   rainmachine:
     title: RainMachine
