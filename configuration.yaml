@@ -200,7 +200,9 @@ media_player:
     client_id: !secret spotify_id
     client_secret: !secret spotify_secret
 
-
+  - platform: songpal
+    name: Sony Amp STR-DN860
+    endpoint: http://192.168.1.171:10000/sony
 
 wemo:
   static:
