@@ -31,9 +31,12 @@ media:
   entities:
     - media_player.cinema_kodi
     - media_player.soundbar
+    - media_player.kitchenplayroom
+    - media_player.bedroom_speaker
     - media_player.spotify
     - media_player.tv
     - media_player.tv_kodi
+    - media_player.sony_amp_strdn860
 tv_room_scenes:
   name: TV room lighting scenes
   entities:
@@ -66,6 +69,7 @@ patio_lights:
     - light.patio2
     - light.patio3
     - light.patio4
+    - light.unnamed_device
     - light.patio5
     - light.patio6
     - light.patio7
