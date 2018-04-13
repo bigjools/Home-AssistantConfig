@@ -233,6 +233,7 @@ nest:
   client_secret: !secret nest_secret
   binary_sensors:
     monitored_conditions:
+      - 'motion_detected'
 
 panel_iframe:
   rainmachine:

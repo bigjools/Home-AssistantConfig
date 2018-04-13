@@ -17,6 +17,7 @@ default_view:
     - sensor.pws_weather_1n_metric
     - sensor.pws_weather_2d_metric
     - sensor.pws_weather_2n_metric
+    - binary_sensor.porch_camera_motion_detected
     - camera.porch
     - history_graph.power_generatedconsumed
     - group.cinema_room_lights
