@@ -75,11 +75,24 @@ patio_lights:
     - light.patio6
     - light.patio7
     - light.patio8
+porch_lights:
+  name: Porch Lights
+  entities:
+    - light.blue_lamp_2   # Porch Right
+    - light.lifx_d073d5310436   # Porch Left
+driveway_lights:
+  name: Driveway
+  entities:
+    - light.drive_left
+    - light.lifx_d073d53086ba  # Drive Middle
+    - light.drive_right
 outside_lights:
   name: Outside lights
   entities:
     - switch.garden_lights
     - group.patio_lights
+    - group.porch_lights
+    - group.driveway_lights
 lights:
   view: yes
   name: Lights
