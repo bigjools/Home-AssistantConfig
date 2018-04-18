@@ -20,8 +20,7 @@ default_view:
     - binary_sensor.porch_camera_motion_detected
     - camera.porch
     - history_graph.power_generatedconsumed
-    - group.cinema_room_lights
-    - group.tv_room_lights
+    - group.inside_lights
     - group.outside_lights
     - media_player.spotify
     - group.weather
@@ -93,6 +92,11 @@ outside_lights:
     - group.patio_lights
     - group.porch_lights
     - group.driveway_lights
+inside_lights:
+  name: Inside lights
+  entities:
+    - group.tv_room_lights
+    - group.cinema_room_lights
 lights:
   view: yes
   name: Lights
