@@ -216,8 +216,7 @@ scene:
   platform: lifx_cloud
   token: !secret lifx_cloud_token
 
-switch:
-  platform: rainmachine
+rainmachine:
   ip_address: 192.168.1.20
   password: !secret rainmachine_password
 

@@ -101,9 +101,11 @@ lights:
   view: yes
   name: Lights
   entities:
+    - switch.garden_lights
     - group.cinema_room_lights
     - group.tv_room_lights
-    - group.outside_lights
+    - group.driveway_lights
+    - group.porch_lights
 irrigation_programs:
   name: Irrigation Programs
   control: hidden
