@@ -25,6 +25,16 @@ default_view:
     - media_player.spotify
     - group.weather
     - camera.office_camera
+automations:
+  view: yes
+  name: Automations
+  entities:
+    - automation.cinema_room_lighting_scene_when_playing_a_movie
+    - automation.cinema_room_lighting_scene_when_stopped_playing_a_movie
+    - automation.flash_patio_lights_when_porch_movment_detected
+    - automation.turn_off_porch_lights_10_minutes_after_last_movement
+    - automation.turn_on_porch_lights_when_movement_after_sunset
+    - automation.update_notifications
 media:
   view: yes
   name: Media
