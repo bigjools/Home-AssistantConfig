@@ -161,15 +161,17 @@ tts:
 
 
 group: !include groups.yaml
-automation: !include automations.yaml
+notify: !include notify.yaml
 script: !include scripts.yaml
+automation: !include automations.yaml
+#automation: !include_dir_merge_list automation/
 
 wake_on_lan:
 
 media_player:
-  - platform: sonos
-    interface_addr: 192.168.1.119
-    #hosts: 192.168.1.133
+# - platform: sonos
+#   interface_addr: 192.168.1.119
+#   #hosts: 192.168.1.133
 
   - platform: kodi
     name: TV Kodi
@@ -212,9 +214,7 @@ light:
   - platform: lifx
     broadcast: 192.168.1.255
 
-scene:
-  platform: lifx_cloud
-  token: !secret lifx_cloud_token
+scene: !include scene.yaml
 
 rainmachine:
   ip_address: 192.168.1.20

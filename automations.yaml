@@ -1,1 +1,92 @@
-[]
+######
+# PORCH LIGHTS
+######
+- alias: Turn on Porch lights when movement after sunset
+  trigger:
+    platform: state
+    entity_id: binary_sensor.porch_camera_motion_detected
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+    service: homeassistant.turn_on
+    entity_id: group.porch_lights
+    data:
+        transition: 1
+
+- alias: Turn off porch lights 10 minutes after last movement
+  trigger:
+    platform: state
+    entity_id: binary_sensor.porch_camera_motion_detected
+    to: 'off'
+    for:
+      minutes: 10
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.porch_lights
+
+######
+# FLASH PATIO LIGHTS ON PORCH MOVEMENT
+######
+- alias: Flash patio lights when porch movment detected
+  trigger:
+    platform: state
+    entity_id: binary_sensor.porch_camera_motion_detected
+    to: 'on'
+  action:
+    service: light.lifx_effect_pulse
+    data:
+        entity_id: group.patio_lights
+        color_name: red
+        brightness: 200
+        period: 0.5
+        cycles: 6
+        mode: breathe
+
+######
+# CINEMA DIMMING
+######
+
+- alias: Cinema room lighting scene when stopped playing a movie
+  trigger: 
+    - platform: state
+      entity_id: media_player.cinema_kodi
+      from: 'playing'
+      to: 'idle'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+  action:
+    service: scene.turn_on
+    entity_id: scene.cinema_normal
+
+- alias: Cinema room lighting scene when playing a movie
+  trigger:
+      - platform: state
+        entity_id: media_player.cinema_kodi
+        to: 'playing'
+        from: 'idle'
+  condition:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+  action:
+        service: scene.turn_on
+        entity_id: scene.cinema_movie
+
+######
+# NEW HASS NOTIFICATION EMAIL
+######
+
+- alias: Update notifications
+  trigger:
+    - platform: state
+      entity_id: updater.updater
+  action:
+    service: notify.julian_edwards_com_email
+    data:
+      message: 'There is a new Home Assistant release available.'
+

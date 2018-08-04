@@ -1,0 +1,17 @@
+- platform: lifx_cloud
+  token: !secret lifx_cloud_token
+
+- name: Cinema Normal
+  entities:
+    group.cinema_room_lights:
+      state: on
+      transition: 2
+      brightness_pct: 85
+
+- name: Cinema Movie
+  entities:
+    group.cinema_room_lights:
+      state: on
+      transition: 2
+      brightness_pct: 8
+      color_name: orange
