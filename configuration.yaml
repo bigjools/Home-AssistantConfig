@@ -227,6 +227,9 @@ camera:
   - platform: mjpeg
     mjpeg_url: http://192.168.1.15:8081/
     name: Office Camera
+  - platform: generic
+    still_image_url: http://www.bom.gov.au/radar/IDR663.gif
+    name: Weather Radar
 
 nest:
   client_id: !secret nest_client_id

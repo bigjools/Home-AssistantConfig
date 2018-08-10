@@ -17,15 +17,15 @@ default_view:
     - sensor.pws_weather_1n_metric
     - sensor.pws_weather_2d_metric
     - sensor.pws_weather_2n_metric
-    - binary_sensor.porch_camera_motion_detected
     - camera.porch
     - history_graph.power_generatedconsumed
     - group.inside_lights
     - group.outside_lights
     - group.air_quality
     - media_player.spotify
-    - group.weather
+    - group.local_weather
     - camera.office_camera
+    - camera.weather_radar
 automations:
   view: yes
   name: Automations
@@ -142,20 +142,28 @@ irrigation:
   entities:
     - group.irrigation_programs
     - group.irrigation_zones
+
 weather:
-  view: yes
+  view: false
   name: Weather
   entities:
     - sensor.pws_weather
     - sensor.pws_temp_c
     - sensor.pws_precip_today_metric
-#      - sensor.pws_precip_1d_mm
+##      - sensor.pws_precip_1d_mm
     - sensor.pws_alerts
-
     - sensor.pws_weather_1d_metric
     - sensor.pws_weather_1n_metric
     - sensor.pws_weather_2d_metric
     - sensor.pws_weather_2n_metric
+
+local_weather:
+  view: yes
+  name: Local Weather
+  entities:
+    - group.weather
+    - camera.weather_radar
+
 downloads:
   view: yes
   name: Downloads
