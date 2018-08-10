@@ -5,13 +5,14 @@
   entities:
     group.cinema_room_lights:
       state: on
-      transition: 2
+      transition: 5
       brightness_pct: 85
+      kelvin: 2500
 
 - name: Cinema Movie
   entities:
     group.cinema_room_lights:
       state: on
-      transition: 2
-      brightness_pct: 8
+      transition: 5
+      brightness_pct: 10
       color_name: orange
