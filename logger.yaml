@@ -1,0 +1,6 @@
+default: default
+logs:
+    requests.packages.urllib3.connectionpool: critical
+    urllib3.connectionpool: critical
+    homeassistant.components.camera: critical
+    requests.packages.urllib3: critical
