@@ -22,6 +22,7 @@ default_view:
     - history_graph.power_generatedconsumed
     - group.inside_lights
     - group.outside_lights
+    - group.air_quality
     - media_player.spotify
     - group.weather
     - camera.office_camera
@@ -175,3 +176,12 @@ sonarr:
     - sensor.sonarr_upcoming
     - sensor.sonarr_queue
     - sensor.sonarr_wanted
+air_quality:
+  name: Air Purifier
+  entities:
+    - fan.lounge
+    - sensor.lounge_air_quality
+    - sensor.lounge_dust
+    - sensor.lounge_filter_life
+    - sensor.lounge_humidity
+    - sensor.lounge_temperature

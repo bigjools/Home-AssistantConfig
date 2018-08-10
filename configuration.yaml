@@ -234,6 +234,11 @@ nest:
     monitored_conditions:
       - 'motion_detected'
 
+dyson:
+  username: !secret dyson_username
+  password: !secret dyson_password
+  language: !secret dyson_language
+
 panel_iframe:
   rainmachine:
     title: RainMachine
