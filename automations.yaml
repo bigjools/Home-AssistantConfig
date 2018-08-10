@@ -26,6 +26,9 @@
   action:
     service: homeassistant.turn_off
     entity_id: group.porch_lights
+    data:
+        # Avoid Nest detecting motion by using a slow change.
+        transition: 30
 
 ######
 # FLASH PATIO LIGHTS ON PORCH MOVEMENT
